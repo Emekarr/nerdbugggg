@@ -2,6 +2,7 @@ const express = require("express");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const response = require("./response/response");
 
 class NerdBugServer {
   constructor() {
@@ -31,14 +32,18 @@ class NerdBugServer {
         extended: false,
       })
     );
+
+    this.app.get("/health", (req, res) => {
+      response.setMessage("server is alive").respond(res);
+    });
   }
 
-  listen(){
-    const PORT = process.env.PORT || "3000"
+  listen() {
+    const PORT = process.env.PORT || "3000";
     this.app.listen(PORT, () => {
-        console.log(`SERVER RUNNING ON PORT ${PORT}`)
-    } )
+      console.log(`SERVER RUNNING ON PORT ${PORT}`);
+    });
   }
 }
 
-module.exports = new NerdBugServer().listen()
+module.exports = new NerdBugServer().listen();
