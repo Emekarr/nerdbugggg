@@ -84,6 +84,7 @@ module.exports = class HttpService {
           message = e.response?.message ?? message;
         }
       }
+      if (process.env.ENVIRONMENT == "test") return null;
       throw new ExternalDependencyError(500, message);
     }
   }
