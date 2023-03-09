@@ -2,8 +2,10 @@ const express = require("express");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
 const response = require("./response/response");
 const ErrorMiddleware = require("./middlewares/error");
+const routes = require("./routes");
 
 class NerdBugServer {
   constructor() {
@@ -33,6 +35,8 @@ class NerdBugServer {
         extended: false,
       })
     );
+
+    this.app.use("/api", routes);
 
     this.app.get("/health", (req, res) => {
       response.setMessage("server is alive").respond(res);
