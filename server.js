@@ -38,6 +38,14 @@ class NerdBugServer {
       response.setMessage("server is alive").respond(res);
     });
 
+    this.app.use("*", (req, res) => {
+      response
+        .setMessage(`the route ${req.method} ${req.originalUrl} does not exist`)
+        .setStatusCode(404)
+        .setSuccess(false)
+        .respond(res);
+    });
+
     this.app.use(ErrorMiddleware);
   }
 
