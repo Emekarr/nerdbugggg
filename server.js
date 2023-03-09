@@ -2,6 +2,8 @@ const express = require("express");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const response = require("./response/response");
 const ErrorMiddleware = require("./middlewares/error");
