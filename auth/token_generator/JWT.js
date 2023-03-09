@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-class JWTGenerator {
+module.exports = class JWTGenerator {
   constructor() {
     this.jwt = jwt;
     this.SECRET_KEY = process.env.JWT_TOKEN;
@@ -17,4 +17,4 @@ class JWTGenerator {
   async verifyToken(token) {
     return this.jwt.verify(token, this.SECRET_KEY);
   }
-}
+};
