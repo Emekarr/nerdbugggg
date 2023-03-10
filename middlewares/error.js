@@ -1,17 +1,17 @@
-const response = require("../response/response");
+const Response = require("../response/response");
 
 const baseErrors = ["ApplicationError", "UserError", "ExternalDependencyError"];
 
 module.exports = (err, req, res, next) => {
   if (baseErrors.includes(err.name)) {
-    response
+    new Response()
       .setMessage("an error occured")
       .setErrorMessages([err.message])
       .setSuccess(false)
       .setStatusCode(err.statusCode)
       .respond(res);
   } else {
-    response
+    new Response()
       .setMessage("an error occured")
       .setErrorMessages([err.message])
       .setSuccess(false)

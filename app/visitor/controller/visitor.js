@@ -1,10 +1,10 @@
-const response = require("../../../response/response");
+const Response = require("../../../response/response");
 const AuthenticateVisitorUseCase = require("../usecases/AuthenticateVisitorUseCase");
 
 const authenticateVistor = async (req, res, next) => {
   try {
     const token = await AuthenticateVisitorUseCase.execute();
-    response
+    new Response()
       .setMessage("authentication success")
       .setData({
         next_step: `visit ${process.env.BASE_URL}/api/v1/person/fetch and set this token as a query parameter called token to get access`,

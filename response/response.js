@@ -32,4 +32,4 @@ class ServerResponse {
   }
 }
 
-module.exports = Object.freeze(new ServerResponse());
+module.exports = ServerResponse;

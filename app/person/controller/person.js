@@ -1,10 +1,10 @@
-const response = require("../../../response/response");
+const Response = require("../../../response/response");
 const FetchProfileUseCase = require("../usecases/FetchProfileUseCase");
 
 const fetchProfile = async (req, res, next) => {
   try {
     const profile = await FetchProfileUseCase.execute();
-    response
+    new Response()
       .setMessage("profile fetched")
       .setData(profile)
       .setStatusCode(200)

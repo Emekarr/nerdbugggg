@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const response = require("./response/response");
+const Response = require("./response/response");
 const ErrorMiddleware = require("./middlewares/error");
 const routes = require("./routes");
 
@@ -41,11 +41,11 @@ class NerdBugServer {
     this.app.use("/api", routes);
 
     this.app.get("/health", (req, res) => {
-      response.setMessage("server is alive").respond(res);
+      new Response().setMessage("server is alive").respond(res);
     });
 
     this.app.use("*", (req, res) => {
-      response
+      new Response()
         .setMessage(`the route ${req.method} ${req.originalUrl} does not exist`)
         .setStatusCode(404)
         .setSuccess(false)
