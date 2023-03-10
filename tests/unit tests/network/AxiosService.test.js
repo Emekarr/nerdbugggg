@@ -1,35 +1,53 @@
 const nock = require("nock");
 
-const NetwotrkService = require("../../network/index");
+const AxiosService = require("../../../network/Axios");
 
 // load env
 const dotenv = require("dotenv");
 dotenv.config();
 
 const baseURL = "https://example.nerdbug.com";
-const networkService = new NetwotrkService(baseURL);
+const axiosService = new AxiosService(baseURL);
 
 test("check if important properties and methods present", () => {
-  expect(networkService.setHeader).toBeDefined();
-  expect(networkService.setAuthHeader).toBeDefined();
-  expect(networkService.setBasicAuth).toBeDefined();
-  expect(networkService.get).toBeDefined();
-  expect(networkService.post).toBeDefined();
-  expect(networkService.update).toBeDefined();
-  expect(networkService.delete).toBeDefined();
-  expect(networkService._handleRequest).toBeDefined();
-  expect(networkService.onError).toBeDefined();
-  expect(networkService.baseUrl).toBe(baseURL);
-  expect(networkService.timeout).toBe(20000);
+  const defaultAxiosError = {
+    message: "could not successfully complete request to an external server",
+    useAsDefault: true,
+  };
+  expect(axiosService.setHeader).toBeDefined();
+  expect(axiosService.setAuthHeader).toBeDefined();
+  expect(axiosService.setBasicAuth).toBeDefined();
+  expect(axiosService.get).toBeDefined();
+  expect(axiosService.post).toBeDefined();
+  expect(axiosService.update).toBeDefined();
+  expect(axiosService.delete).toBeDefined();
+  expect(axiosService._handleRequest).toBeDefined();
+  expect(axiosService.onError).toBeDefined();
+  expect(axiosService.baseUrl).toBe(baseURL);
+  expect(axiosService.timeout).toBe(20000);
+  expect(axiosService.__error).toEqual(defaultAxiosError);
+
+  expect(typeof axiosService.setHeader).toBe("function");
+  expect(typeof axiosService.setAuthHeader).toBe("function");
+  expect(typeof axiosService.setBasicAuth).toBe("function");
+  expect(typeof axiosService.get).toBe("function");
+  expect(typeof axiosService.post).toBe("function");
+  expect(typeof axiosService.update).toBe("function");
+  expect(typeof axiosService.delete).toBe("function");
+  expect(typeof axiosService._handleRequest).toBe("function");
+  expect(typeof axiosService.onError).toBe("function");
+  expect(typeof axiosService.baseUrl).toBe("string");
+  expect(typeof axiosService.timeout).toBe("number");
+  expect(typeof axiosService.__error).toEqual("object");
 });
 
-describe("test HTTP methods defined in NetworkService", () => {
+describe("test HTTP methods defined in AxiosService", () => {
   test("test successful get request", async () => {
     nock(baseURL).get("/").reply(200, {
       name: "NerdBug",
       success: true,
     });
-    const response = await networkService.get("/");
+    const response = await axiosService.get("/");
 
     expect(response).toEqual({
       name: "NerdBug",
@@ -43,7 +61,7 @@ describe("test HTTP methods defined in NetworkService", () => {
       .reply(400, {
         error: ["an error occured"],
       });
-    const response = await networkService.get("/");
+    const response = await axiosService.get("/");
 
     expect(response).toBe(null);
   });
@@ -55,7 +73,7 @@ describe("test HTTP methods defined in NetworkService", () => {
         body: { name: "NerdBug" },
         success: true,
       });
-    const response = await networkService.post("/");
+    const response = await axiosService.post("/");
 
     expect(response).toEqual({
       body: { name: "NerdBug" },
@@ -69,7 +87,7 @@ describe("test HTTP methods defined in NetworkService", () => {
       .reply(400, {
         error: ["an error occured"],
       });
-    const response = await networkService.post("/");
+    const response = await axiosService.post("/");
 
     expect(response).toBe(null);
   });
@@ -81,7 +99,7 @@ describe("test HTTP methods defined in NetworkService", () => {
         body: { name: "NerdBug" },
         success: true,
       });
-    const response = await networkService.update("/");
+    const response = await axiosService.update("/");
 
     expect(response).toEqual({
       body: { name: "NerdBug" },
@@ -96,7 +114,7 @@ describe("test HTTP methods defined in NetworkService", () => {
         body: { name: "NerdBug" },
         success: true,
       });
-    const response = await networkService.update("/");
+    const response = await axiosService.update("/");
 
     expect(response).toBe(null);
   });
@@ -108,7 +126,7 @@ describe("test HTTP methods defined in NetworkService", () => {
         body: { name: "NerdBug" },
         success: true,
       });
-    const response = await networkService.delete("/");
+    const response = await axiosService.delete("/");
 
     expect(response).toEqual({
       body: { name: "NerdBug" },
@@ -123,7 +141,7 @@ describe("test HTTP methods defined in NetworkService", () => {
         body: { name: "NerdBug" },
         success: true,
       });
-    const response = await networkService.update("/");
+    const response = await axiosService.update("/");
 
     expect(response).toEqual(null);
   });

@@ -1,9 +1,9 @@
-const JWTGenerator = require("../../../auth/token_generator/JWT");
+const JWTGenerator = require("../../../../auth/token_generator/JWT");
 
 const dotenv = require("dotenv");
 dotenv.config();
 
-test("test JWT module for required propertiestest token generation", () => {
+test("test JWT module for required properties", () => {
   const jwtGenerator = new JWTGenerator();
   expect(jwtGenerator.ISSUER).toBeDefined();
   expect(jwtGenerator.SECRET_KEY).toBeDefined();

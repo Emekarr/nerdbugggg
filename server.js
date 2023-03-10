@@ -60,6 +60,7 @@ class NerdBugServer {
     this.app.listen(PORT, () => {
       console.log(`SERVER RUNNING ON PORT ${PORT}`);
     });
+    return this;
   }
 }
 

@@ -1,8 +1,8 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const authMiddleware = require("../../middlewares/auth");
-const tokenGenerator = require("../../auth/token_generator");
+const authMiddleware = require("../../../middlewares/auth");
+const tokenGenerator = require("../../../auth/token_generator");
 
 describe("test auth middleware", () => {
   test("authentication failure -- no token", async () => {

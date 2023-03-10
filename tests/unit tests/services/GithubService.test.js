@@ -1,4 +1,4 @@
-const GithubService = require("../../services/GithubService");
+const GithubService = require("../../../services/GithubService");
 
 // load env
 const dotenv = require("dotenv");

@@ -1,4 +1,4 @@
-const Response = require("../../response/response");
+const Response = require("../../../response/response");
 
 test("test for properties present in the ServerResponse class", () => {
   const response = new Response();
