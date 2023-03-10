@@ -64,4 +64,4 @@ class NerdBugServer {
   }
 }
 
-module.exports = new NerdBugServer().listen();
+module.exports = NerdBugServer;
