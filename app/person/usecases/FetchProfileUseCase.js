@@ -13,7 +13,7 @@ class FetchProfileUseCase {
   }
 
   async __getPersonGithubProfile() {
-    let repos = await this.githubService.fetchUserRepositories("emekarr");
+    let repos = await this.githubService.fetchUserRepositories("emekarddr");
     repos = repos.map((repo) => {
       return {
         name: repo.name,
