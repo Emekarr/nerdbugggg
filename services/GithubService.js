@@ -1,3 +1,4 @@
+const logger = require("../logger");
 const NetworkService = require("../network");
 
 class GithubService {
@@ -6,6 +7,7 @@ class GithubService {
   }
 
   async fetchUserRepositories(username) {
+    logger.info(`fetching user github profile - ${username}`);
     return await this.network.get(`/users/${username}/repos`);
   }
 }

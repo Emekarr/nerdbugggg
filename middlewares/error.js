@@ -1,8 +1,10 @@
+const logger = require("../logger");
 const Response = require("../response/response");
 
 const baseErrors = ["ApplicationError", "UserError", "ExternalDependencyError"];
 
 module.exports = (err, req, res, next) => {
+  logger.error(`${err.name} - ${err.message}`);
   if (baseErrors.includes(err.name)) {
     new Response()
       .setMessage("an error occured")

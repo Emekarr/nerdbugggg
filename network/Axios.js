@@ -1,5 +1,6 @@
 const axios = require("axios");
 const ExternalDependencyError = require("../errors/ExternalDependencyError");
+const logger = require("../logger");
 
 module.exports = class HttpService {
   constructor(baseUrl) {
@@ -78,6 +79,8 @@ module.exports = class HttpService {
       const response = await Promise.resolve(requestPromise);
       return response.data;
     } catch (e) {
+      logger.error("error making nexwork request");
+      logger.error(e);
       let message = this.__error.message;
       if (e.response) {
         if (e.isAxiosError && this.__error.useAsDefault) {
