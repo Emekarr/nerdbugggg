@@ -32,7 +32,7 @@ class NerdBugServer {
     );
 
     // log requets
-    this.app.use(morgan('combined'));
+    this.app.use(morgan("combined"));
 
     // parse request body
     this.app.use(bodyParser.json());
