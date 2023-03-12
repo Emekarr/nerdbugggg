@@ -2,6 +2,7 @@ const express = require("express");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -29,6 +30,9 @@ class NerdBugServer {
         origin: "*",
       })
     );
+
+    // log requets
+    this.app.use(morgan('combined'));
 
     // parse request body
     this.app.use(bodyParser.json());
