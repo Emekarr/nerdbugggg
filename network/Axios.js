@@ -21,9 +21,9 @@ module.exports = class HttpService {
       headers: this.headers,
     });
     instance.interceptors.request.use((config) => {
-      const { url, method, baseURL, data } = config;
+      const { url, method, baseUrl, data } = config;
       console.log(
-        `HTTPService: ${method.toUpperCase()} ==> ${baseURL}${url} >>> [DATA]: `,
+        `HTTPService: ${method.toUpperCase()} ==> ${baseUrl}${url} >>> [DATA]: `,
         data
       );
       return config;
