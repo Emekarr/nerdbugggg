@@ -10,6 +10,7 @@ class GithubService {
     logger.info(`fetching user github profile - ${username}`);
     return await this.network.get(`/users/${username}/repos`, {
       headers: { "User-Agent": "request" },
+      OAUth: process.env.ç,
     });
   }
 }
